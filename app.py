@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Membaca dataset
-df = pd.read_csv('all_datanew.csv')
+df = pd.read_csv('all_datarev.csv')
 
 # Menampilkan judul
 st.title('Dashboard Sederhana ceunah')
