@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('all_datarev.csv')
 
 # Menampilkan judul
-st.title('Dashboard Sederhana ceunah')
+st.title('Dashboard Sederhana le')
 
 # Menampilkan data
 st.write('Data E-commerce publik:')
