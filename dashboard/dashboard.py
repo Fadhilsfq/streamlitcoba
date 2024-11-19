@@ -26,16 +26,12 @@ except Exception as e:
     st.error(f"Error merging data: {e}")
     st.stop()
 
-# Tampilkan beberapa data gabungan untuk memastikan berhasil digabungkan
-st.write("Contoh data gabungan:")
-st.write(merged_data.head())
-
-# Tambahkan filter interaktif
+# filter interaktif
 st.sidebar.title("Filters")
 date_filter = st.sidebar.date_input("Select Date Range", [], key='date_range_filter')
 category_filter = st.sidebar.multiselect("Select Product Categories", merged_data['product_category_name'].unique(), key='category_filter')
 
-# Terapkan filter berdasarkan input pengguna
+# filter berdasarkan input pengguna
 if date_filter:
     try:
         merged_data['order_purchase_timestamp'] = pd.to_datetime(merged_data['order_purchase_timestamp'])
