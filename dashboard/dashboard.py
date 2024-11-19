@@ -8,10 +8,10 @@ st.title('Dashboard Analisis Penjualan E-Commerce')
 
 @st.cache
 def load_data():
-    orders_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\orders_dataset.csv')
-    order_items_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\order_items_dataset.csv')
-    products_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\products_dataset.csv')
-    order_reviews_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\order_reviews_dataset.csv')
+    orders_data = pd.read_csv('dashboard/E Commerce Public Dataset/orders_dataset.csv')
+    order_items_data = pd.read_csv('dashboard/E Commerce Public Dataset/order_items_dataset.csv')
+    products_data = pd.read_csv('dashboard/E Commerce Public Dataset/products_dataset.csv')
+    order_reviews_data = pd.read_csv('dashboard/E Commerce Public Dataset/order_reviews_dataset.csv')
     return orders_data, order_items_data, products_data, order_reviews_data
 
 # Load data
