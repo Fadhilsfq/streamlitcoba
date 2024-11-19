@@ -11,5 +11,5 @@ python -m streamlit hello
 ```
 ## Run Streamlit app
 ```
-streamlit run dashboard.py
+python -m streamlit run dashboard/dashboard.py
 ```
