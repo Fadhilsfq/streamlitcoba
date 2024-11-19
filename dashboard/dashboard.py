@@ -8,10 +8,10 @@ st.title('Dashboard Analisis Penjualan E-Commerce')
 
 @st.cache
 def load_data():
-    orders_data = pd.read_csv('dashboard/E Commerce Public Dataset/orders_dataset.csv')
-    order_items_data = pd.read_csv('dashboard/E Commerce Public Dataset/order_items_dataset.csv')
-    products_data = pd.read_csv('dashboard/E Commerce Public Dataset/products_dataset.csv')
-    order_reviews_data = pd.read_csv('dashboard/E Commerce Public Dataset/order_reviews_dataset.csv')
+    orders_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\orders_dataset.csv')
+    order_items_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\order_items_dataset.csv')
+    products_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\products_dataset.csv')
+    order_reviews_data = pd.read_csv('D:\\UNNES\\Kegabutan\\Dicoding\\Latihan Data\\Submission Muhammad Syafiq Fadhilah terbaru\\E-Commerce Public Dataset\\order_reviews_dataset.csv')
     return orders_data, order_items_data, products_data, order_reviews_data
 
 # Load data
@@ -21,6 +21,26 @@ orders_data, order_items_data, products_data, order_reviews_data = load_data()
 merged_data = pd.merge(orders_data, order_items_data, on='order_id', how='inner')
 merged_data = pd.merge(merged_data, products_data[['product_id', 'product_category_name']], on='product_id', how='inner')
 merged_data = pd.merge(merged_data, order_reviews_data[['order_id', 'review_score']], on='order_id', how='inner')
+
+# filter interaktif
+st.sidebar.title("Filters")
+date_filter = st.sidebar.date_input("Select Date Range", [])
+category_filter = st.sidebar.multiselect("Select Product Categories", merged_data['product_category_name'].unique())
+
+# filter berdasarkan input pengguna
+if date_filter:
+    merged_data['order_purchase_timestamp'] = pd.to_datetime(merged_data['order_purchase_timestamp'])
+    if len(date_filter) == 2:
+        start_date, end_date = date_filter
+        merged_data = merged_data[(merged_data['order_purchase_timestamp'] >= pd.to_datetime(start_date)) &
+                                  (merged_data['order_purchase_timestamp'] <= pd.to_datetime(end_date))]
+
+if category_filter:
+    merged_data = merged_data[merged_data['product_category_name'].isin(category_filter)]
+
+# memastikan data yang di-filter tidak kosong
+if merged_data.empty:
+    st.write("Tidak ada data yang sesuai dengan filter yang diterapkan.")
 
 # Pertanyaan 1: Berapa banyak jumlah top penjualan per kategori produk
 st.subheader('Top 10 Kategori Produk Berdasarkan Penjualan')
